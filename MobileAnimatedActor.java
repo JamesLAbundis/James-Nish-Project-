@@ -49,13 +49,11 @@ public abstract class MobileAnimatedActor
       path = A_swag(world, dest_pt);
       if(path==null)
       {
-        System.out.println("the path is null");
+       // System.out.println("the path is null");
          return this.getPosition();
       }
-      //Node nextPos= path.get(1);
-      //return new Point(nextPos.x,nextPos.y);
 
-      System.out.println(path.size());
+      //System.out.println(path.size());
       return path.get(1);
    }
    //protected ArrayList<Point>dfs()
@@ -92,8 +90,8 @@ public abstract class MobileAnimatedActor
       //reminder: int f_score = g_score+ heuristic_cost_estimate(start, goal);
 
       while(openSet.size()>0)
-      {   System.out.println("closed set" + " " + closedSet.size());
-         System.out.println("openSet" + " " + openSet.size());
+      {  //System.out.println("closed set" + " " + closedSet.size());
+         //System.out.println("openSet" + " " + openSet.size());
 
          Node current = Node.find_min_F_score(openSet);
 
@@ -101,13 +99,12 @@ public abstract class MobileAnimatedActor
          if (current.x == goal_node.x && current.y == goal_node.y)
             //reconstruct path
             {
-               System.out.println(" Goal is found");
+               //System.out.println(" Goal is found");
                ArrayList<Point> total_path = new ArrayList<>();
                //total_path.add(new Point(current.x, current.y));
                while(current.getCameFrom() != null)
                {
                   current= current.getCameFrom();
-                  System.out.println(" In reconstruction while loop");
                   total_path.add(0, new Point(current.x, current.y));
                }
                return total_path;
@@ -143,20 +140,6 @@ public abstract class MobileAnimatedActor
       //System.out.println("Open set is not greater than zero");
        return null;
    }
-/*
-   protected ArrayList<Point> reconstruct_path(Node[][] came_from_map, Node current)
-   {
-      ArrayList<Point> total_path = new ArrayList();
-      total_path.add(new Point(current.x, current.y));
-      while (contains(came_from_map, current)) //redefined contains func to look for current node in map
-      {
-         Node fun = came_from_map[current.x][current.y];
-         current = fun.getCameFrom();
-         total_path.add(new Point(current.x, current.y));
-      }
-      return total_path;
-   }
-   */
 
 
    protected static boolean adjacent(Point p1, Point p2)
@@ -198,43 +181,6 @@ public abstract class MobileAnimatedActor
       return neighbors;
    }
 
-   /*
-   protected NodeWorld findNeighbors(WorldModel world, Node current, Node[][] came_from){
-
-      ArrayList<Node> neighbors = new ArrayList<>();
-      Point pt1= new Point(this.getPosition().x-1, this.getPosition().y);
-      Point pt2 = new Point(this.getPosition().x+1,this.getPosition().y);
-      Point pt3= new Point(this.getPosition().x, this.getPosition().y+1);
-      Point pt4= new Point(this.getPosition().x, this.getPosition().y-1);
-
-
-      if(canPassThrough(world,pt1)){
-         Node n1= new Node(pt1.x, pt1.y,current);
-         came_from[pt1.x][pt1.y]=n1;
-         neighbors.add(n1);
-
-     }
-      if(canPassThrough(world,pt2)){
-         Node n2= new Node(pt2.x, pt2.y,current);
-         came_from[pt2.x][pt2.y]=n2;
-         neighbors.add(n2);
-
-      }
-      if(canPassThrough(world,pt3)){
-         Node n3= new Node(pt3.x, pt3.y,current);
-         came_from[pt3.x][pt3.y]=n3;
-         neighbors.add(n3);
-
-      }
-      if(canPassThrough(world,pt4)){
-         Node n4= new Node(pt4.x, pt4.y,current);
-         came_from[pt4.x][pt4.y]=n4;
-         neighbors.add(n4);
-      }
-
-     // System.out.println(openSet.size());
-      return new NodeWorld(neighbors, came_from);
-   */
 
    public boolean contains(Node[][] map, Node n)
    {

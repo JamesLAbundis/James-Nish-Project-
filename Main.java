@@ -1,9 +1,6 @@
 import processing.core.*;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-import java.util.Scanner;
+
+import java.util.*;
 import java.io.FileNotFoundException;
 import java.io.File;
 
@@ -71,6 +68,68 @@ public class Main extends PApplet
       }
 
       view.drawViewport();
+   }
+   public void mousePressed(){
+      //spawn lava where the mouse is pressed
+      int roundX= mouseX/32;
+      int roundY= mouseY/32;
+      Point mouse_initial = new Point(roundX, roundY);
+
+
+      ArrayList<PImage> lava_imgs= new ArrayList<>();
+      lava_imgs.add(loadImage("lava.png"));
+      Background lava = new Background("lava",lava_imgs);
+
+      for (int i= roundX-1; i <= roundX+1; i++){
+         for( int j = roundY-1; j<= roundY+1;j++){
+
+            Point mouse_pos= new Point(i,j);
+
+            if( world.withinBounds(mouse_pos)) {
+               world.setBackground(mouse_pos, lava);
+            }
+
+         }
+      }
+
+      ArrayList<PImage> volc_imgs= new ArrayList<>();
+      volc_imgs.add(loadImage("volcano.png"));
+      Background volcano= new Background("lava", volc_imgs);
+      world.setBackground(new Point(roundX, roundY), volcano);
+      addKanye(new Point( roundX, roundY));
+   }
+
+   public void addKanye(Point mousePt){
+
+      ArrayList<PImage> k_imgs= new ArrayList<>();
+      k_imgs.add(loadImage("kanye.png"));
+
+      ArrayList<Kanye> kimk= new ArrayList<>();
+      Point pt1= new Point(mousePt.x-2,mousePt.y);
+      Point pt2= new Point(mousePt.x+2,mousePt.y);
+      Point pt3 = new Point(mousePt.x,mousePt.y-2);
+      Point pt4= new Point (mousePt.x, mousePt.y+2);
+
+      //adds kanye entitites at valid positions in the world.
+
+      if(world.withinBounds(pt1)){
+         kimk.add(new Kanye("kanye",pt1,100,50,k_imgs));
+      }
+
+      if(world.withinBounds(pt2)){
+         kimk.add(new Kanye("kanye",pt2,100,50,k_imgs));
+      }
+      if(world.withinBounds(pt3)){
+         kimk.add(new Kanye("kanye",pt3,100,50,k_imgs));
+      }
+      if(world.withinBounds(pt4)){
+         kimk.add(new Kanye("kanye",pt4,100,50,k_imgs));
+      }
+
+      for(Kanye best: kimk){
+         world.addEntity(best);
+      }
+
    }
 
    public void keyPressed()

@@ -11,6 +11,8 @@ public class WorldModel
    private int numCols;
    private OrderedList<Action> actionQueue;
 
+   private boolean lava = false;
+
    public WorldModel(int numRows, int numCols, Background background)
    {
       this.background = new Background[numRows][numCols];
@@ -25,6 +27,8 @@ public class WorldModel
          Arrays.fill(this.background[row], background);
       }
    }
+
+
 
    public boolean withinBounds(Point pt)
    {
@@ -64,6 +68,7 @@ public class WorldModel
 
       return nearestEntity(ofType, pt);
    }
+
 
    public void addEntity(WorldEntity entity)
    {
@@ -145,6 +150,16 @@ public class WorldModel
          next.item.execute(time);
          next = actionQueue.head();
       }
+   }
+
+   public void setLavaTrue()
+   {
+      this.lava = true;
+   }
+
+   public boolean getLava()
+   {
+      return lava;
    }
 
   //May have to manipulate for A* Recursion
