@@ -7,7 +7,8 @@ public class WorldView
    private WorldModel world;
    private int tileWidth;
    private int tileHeight;
-   private Viewport viewport;
+   //we changed viewport from private to public
+   public Viewport viewport;
 
    public WorldView(int numCols, int numRows, PApplet screen, WorldModel world,
       int tileWidth, int tileHeight)
@@ -18,6 +19,13 @@ public class WorldView
       this.tileHeight = tileHeight;
       this.viewport = new Viewport(numRows, numCols);
    }
+
+   //we made this function
+   public Viewport getViewport()
+   {
+      return this.viewport;
+   }
+
 
    public void drawViewport()
    {

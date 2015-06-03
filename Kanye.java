@@ -11,6 +11,11 @@ public class Kanye extends MobileAnimatedActor {
         super(name, position, rate, animation_rate, imgs);
     }
 
+    protected boolean canPassThrough(WorldModel world, Point pt)
+    {
+        return !world.isOccupied(pt) || world.getTileOccupant(pt) instanceof Miner;
+    }
+
     private boolean move(WorldModel world, WorldEntity target)
     {
         if (target == null)
@@ -74,10 +79,5 @@ public class Kanye extends MobileAnimatedActor {
         return quake;
     }
 
-
-    protected boolean canPassThrough(WorldModel world, Point pt)
-    {
-        return !world.isOccupied(pt) || world.getTileOccupant(pt) instanceof Miner;
-    }
 
 }

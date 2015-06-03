@@ -27,4 +27,17 @@ quake images/quake5.bmp 255 255 255 0
 quake images/quake6.bmp 255 255 255 0
 rocks images/rock.bmp
 vein images/vein.bmp
+kanye images/kanye.bmp
 background_default images/none.bmp
+blob images/newblob1.bmp 0 0 0 0
+blob images/newblob2.bmp 0 0 0 0
+blob images/newblob3.bmp 0 0 0 0
+blob images/newblob4.bmp 0 0 0 0
+blob images/newblob5.bmp 0 0 0 0
+blob images/newblob6.bmp 0 0 0 0
+blob images/newblob7.bmp 0 0 0 0
+blob images/newblob8.bmp 0 0 0 0
+blob images/newblob9.bmp 0 0 0 0
+blob images/newblob10.bmp 0 0 0 0
+
+
