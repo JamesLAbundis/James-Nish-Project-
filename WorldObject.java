@@ -5,7 +5,7 @@ import java.util.Iterator;
 public class WorldObject
 {
    private String name;
-   private List<PImage> imgs;
+   protected List<PImage> imgs;
    private Iterator<PImage> iter;
    private PImage currentImg;
 

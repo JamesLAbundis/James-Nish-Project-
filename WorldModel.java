@@ -55,8 +55,27 @@ public class WorldModel
       return withinBounds(pt) && getCell(occupancy, pt) != null;
    }
 
+   public Lava findNearestLava(Point pt)
+   {
+      List<Lava> ofType = new LinkedList<>();
+      for (int i = 0; i < numRows; i++)
+      {
+         for(int j = 0; i < numCols; j++)
+         {
+            Background bgnd = background[i][j];
+            if (bgnd.getClass() == Lava.class)
+            {
+
+               ofType.add((Lava)bgnd);
+            }
+         }
+      }
+      return nearestLava(ofType, pt);
+   }
+
    public WorldEntity findNearest(Point pt, Class type)
    {
+
       List<WorldEntity> ofType = new LinkedList<>();
       for (WorldEntity entity : entities)
       {
@@ -160,6 +179,27 @@ public class WorldModel
    public boolean getLava()
    {
       return lava;
+   }
+
+   private static Lava nearestLava(List<Lava> lavas, Point pt)
+   {
+      if (lavas.size() == 0)
+      {
+         return null;
+      }
+      Lava nearest = lavas.get(0);
+      double nearest_dist = distance_sq(nearest.getPosition(), pt);
+
+      for (Lava lava: lavas)
+      {
+         double dist = distance_sq(lava.getPosition(), pt);
+         if (dist < nearest_dist)
+         {
+            nearest = lava;
+            nearest_dist = dist;
+         }
+      }
+      return nearest;
    }
 
   //May have to manipulate for A* Recursion

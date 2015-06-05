@@ -1,0 +1,6 @@
+Include a text file named WORLD_EVENT in your submission that describes 1) how to trigger the event, 2) what should happen when the event is triggered, 3) what the affected entities should do, and 4) what the new entity is and how it should behave.
+
+1) Trigger the event with a mouse-click
+2) Lava should emerge with a radius of 1 along with 4 Kanye Wests. 3 black holes spawn.
+3. OreBlobs are affected. Changes to a flashing animation switching between black and white oreblobs. New behavior is going towards lava and once it touches lava, spawns at new site (black hole on world).
+4) The new entity is Kanye West. Since he is the best, he will destroy all the miners. 

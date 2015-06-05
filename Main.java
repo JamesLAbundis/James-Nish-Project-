@@ -68,6 +68,18 @@ public class Main extends PApplet
          next_time = time + TIMER_ACTION_DELAY;
       }
 
+      /*if(world.getLava() == true)
+      {
+         for(WorldEntity e: world.getEntities())
+         {
+            if(e.getClass() == OreBlob.class)
+            {
+               OreBlob o = (OreBlob)e;
+               o.setimgs(imageStore);
+            }
+         }
+      } */
+
       view.drawViewport();
    }
    public void mousePressed(){
@@ -79,20 +91,28 @@ public class Main extends PApplet
       Point mouse_initial = new Point(roundX+shiftX, roundY+shiftY);
 
 
-
-
-
       ArrayList<PImage> lava_imgs= new ArrayList<>();
       lava_imgs.add(loadImage("lava.png"));
-      Background lava = new Background("lava",lava_imgs);
+
+      ArrayList<PImage> spawn_imgs = new ArrayList<>();
+      spawn_imgs.add(loadImage("black.png"));
+      Background black_hole = new Background("black", spawn_imgs);
+      world.setBackground(new Point(0,0), black_hole);
+      world.setBackground(new Point(0,5), black_hole);
+      world.setBackground(new Point(0,10),black_hole);
+      //Lava lava = new Lava("lava",lava_imgs, null);
 
       for (int i= roundX-1; i <= roundX+1; i++){
          for( int j = roundY-1; j<= roundY+1;j++){
 
             Point mouse_pos= new Point(i+shiftX,j+shiftY);
 
-            if( world.withinBounds(mouse_pos)) {
+            if(world.withinBounds(mouse_pos))
+            {
+               Lava lava = new Lava("lava", lava_imgs, mouse_pos);
+               LavaEntity lavaobstacle = new LavaEntity("LavaEntity", mouse_pos, lava_imgs);
                world.setBackground(mouse_pos, lava);
+               world.addEntity(lavaobstacle);
             }
 
          }
@@ -103,12 +123,15 @@ public class Main extends PApplet
       Background volcano= new Background("lava", volc_imgs);
       world.setBackground(mouse_initial, volcano);
       addKanye(mouse_initial);
+      world.setLavaTrue();
+
    }
 
    public void addKanye(Point mousePt){
 
-      ArrayList<PImage> k_imgs= new ArrayList<>();
+      List<PImage> k_imgs= new ArrayList<>();
       k_imgs.add(loadImage("kanye.png"));
+      k_imgs = imageStore.get("kanye");
 
       ArrayList<Kanye> kimk= new ArrayList<>();
       Point pt1= new Point(mousePt.x-2,mousePt.y);
@@ -119,24 +142,24 @@ public class Main extends PApplet
       //adds kanye entitites at valid positions in the world.
 
       if(world.withinBounds(pt1)){
-         kimk.add(new Kanye("kanye",pt1,800,650,k_imgs));
+         kimk.add(new Kanye("kanye",pt1,500,650,k_imgs));
       }
 
       if(world.withinBounds(pt2)){
-         kimk.add(new Kanye("kanye",pt2,800,700,k_imgs));
+         kimk.add(new Kanye("kanye",pt2,500,700,k_imgs));
       }
       if(world.withinBounds(pt3)){
-         kimk.add(new Kanye("kanye",pt3,800,650,k_imgs));
+         kimk.add(new Kanye("kanye",pt3,500,650,k_imgs));
       }
-      if(world.withinBounds(pt4)){
-         kimk.add(new Kanye("kanye",pt4,800,650,k_imgs));
+         kimk.add(new Kanye("kanye",pt4,500,650,k_imgs));
+         if(world.withinBounds(pt4)){
       }
 
       for(Kanye best: kimk){
          world.addEntity(best);
          world.scheduleAction(best.createAction(world, imageStore),10);
+         best.scheduleAnimation(world);
       }
-
    }
 
    public void keyPressed()
